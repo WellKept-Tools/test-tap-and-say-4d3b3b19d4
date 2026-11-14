@@ -150,7 +150,9 @@ svg.i { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.12em; }
 .cover .ribbon span { position: absolute; inset: 0 0 1.4cqw; display: grid; place-items: center; font-size: 5.6cqw; font-weight: 900; color: #fff; letter-spacing: .03em; padding: 0 9cqw; }
 .cover .bub { position: absolute; width: 19cqw; height: 19cqw; border-radius: 50%; background: #fff; display: grid; place-items: center;
   box-shadow: 0 1.2cqw 0 rgba(140,40,30,.25); border: 1.1cqw solid #ffd6c9; }
-.cover .bub img { width: 86%; height: 86%; object-fit: contain; border-radius: 50%; }
+/* portrait en buste : le haut du personnage dans un cercle, le reste coupé (la maman entière débordait sur le tracteur, 14/11) */
+.cover .bub .face { position: absolute; inset: 6%; border-radius: 50%; overflow: hidden; }
+.cover .bub .face img { display: block; width: 80%; height: auto; margin: 9% auto 0; }
 .cover .bub::after { content: ""; position: absolute; width: 5cqw; height: 5cqw; right: -1.5cqw; top: -1cqw; border-radius: 50%; background: var(--sun) center/62% no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%233b2a20' d='M3 9v6h4l5 4V5L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z'/%3E%3C/svg%3E"); }
 .cover .bub.play { animation: pop .55s cubic-bezier(.3,1.6,.5,1); }
@@ -236,8 +238,8 @@ svg.i { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.12em; }
 }
 
 /* ---------- démo gratuite (build.py --demo) ---------- */
-.demosash { position: absolute; top: 0; right: 0; width: 46cqw; height: 46cqw; overflow: hidden; pointer-events: none; z-index: 3; }
-.demosash span { position: absolute; top: 9.5cqw; right: -15cqw; width: 64cqw; transform: rotate(45deg); background: var(--sun, #ffd23f); color: #3b2a20;
+.demosash { position: absolute; top: 0; left: 0; width: 46cqw; height: 46cqw; overflow: hidden; pointer-events: none; z-index: 3; }
+.demosash span { position: absolute; top: 9.5cqw; left: -15cqw; width: 64cqw; transform: rotate(-45deg); background: var(--sun, #ffd23f); color: #3b2a20;
   text-align: center; font-weight: 900; font-size: 4.6cqw; letter-spacing: .06em; padding: 1.6cqw 0; box-shadow: 0 .8cqw 0 rgba(0,0,0,.14); }
 .demotag { position: absolute; top: 1.4cqw; left: 50%; transform: translateX(-50%); z-index: 2; pointer-events: none;
   background: #3b2a20; color: #fff; font-size: 2.4cqw; font-weight: 900; letter-spacing: .08em; padding: .5cqw 2.2cqw; border-radius: 99px; opacity: .82; }
@@ -382,7 +384,7 @@ svg.i { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.12em; }
         `<span class="l${c === "&" ? " amp" : ""}" style="--r:${(k % 2 ? 4 : -4) + base}deg;--y:${k % 2 ? -0.8 : 0.6}cqw">${c === "&" ? "&amp;" : c}</span>`).join("");
       const has = id => D.img[id] ? id : null;
       const actor = (id, left, w, bottom, extra) => has(id) ? `<button class="word actor" data-id="${id}" aria-label="${(D.words.find(x => x.id === id) || {}).word || ""}" style="left:${left}cqw;width:${w}cqw;bottom:${bottom}%"><img src="${D.img[id]}" alt="">${extra || ""}</button>` : "";
-      const bub = (id, side, top) => has(id) ? `<button class="word bub" data-id="${id}" aria-label="${(D.words.find(x => x.id === id) || {}).word || ""}" style="${side}:3cqw;top:${top}%"><img src="${D.img[id]}" alt=""></button>` : "";
+      const bub = (id, side, top) => has(id) ? `<button class="word bub" data-id="${id}" aria-label="${(D.words.find(x => x.id === id) || {}).word || ""}" style="${side}:3cqw;top:${top}%"><span class="face"><img src="${D.img[id]}" alt=""></span></button>` : "";
       html = `<div class="page">
         <div class="glow"></div><svg class="rays" viewBox="0 0 100 100"><path d="${rays}" fill="#ff9f86"/></svg>
         ${note(6, 5, -12)}${note(16, 33, 10)}${note(88, 31, -8)}${note(80, 48, 14)}${note(9, 47, 6)}
