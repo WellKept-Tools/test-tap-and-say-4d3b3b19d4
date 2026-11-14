@@ -1,5 +1,5 @@
 /* Tap & Say : garde le livre sur l'appareil pour qu'il s'ouvre sans connexion. */
-const CACHE = "tap-and-say-bb421929c8";
+const CACHE = "tap-and-say-ae7f9bc4da";
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./apple-touch-icon.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener("activate", e => e.waitUntil(caches.keys()
